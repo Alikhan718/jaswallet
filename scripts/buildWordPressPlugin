@@ -9,10 +9,9 @@ npm run build:mainnet-widget
 npm run build:testnet-widget
 
 
-# update repo or clone
-#rm -rf WalletWpPlugin
-git clone https://sorentobot:$1@github.com/swaponline/WalletWpPlugin.git
-cd WalletWpPlugin/vendors/swap
+# update repo 
+#rm -rf JASWalletWpPlugin
+cd jASWalletWpPlugin/vendors/swap
 git checkout master
 git fetch origin
 git reset --hard origin/master
@@ -43,7 +42,6 @@ mv app.${buildId}.css app.css
 mv mainnet-vendor.${buildId}.js vendor.js
 rm index.html
 rm erc20tokens.js
-# https://screenshots.wpmix.net/Telegram_9DNCH0DXYKUiL0Mo1BvVvR7WvDiea0ON.png
 rm -rf assets
 
 # make testnet
@@ -70,8 +68,8 @@ cd ../
 #####
 cd ../../
 
-perl -pi -e "s/'MCWALLET_BUILD_VER', '.*?'/'MCWALLET_BUILD_VER', '${buildId}'/g" multi-currency-wallet-pro.php
-perl -i -pe 's/\b(\d+)(?=\D*$)/$1+1/e' multi-currency-wallet-pro.php
+perl -pi -e "s/'MCWALLET_BUILD_VER', '.*?'/'MCWALLET_BUILD_VER', '${buildId}'/g" JAS-wallet-pro.php
+perl -i -pe 's/\b(\d+)(?=\D*$)/$1+1/e' JAS-wallet-pro.php
 
 # commit build to repo
 
