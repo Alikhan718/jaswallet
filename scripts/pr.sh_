@@ -52,12 +52,7 @@ PR=`echo $dir | tr -d -c 0-9`
 
 $NPM_CMD  install --force
 
-$CURL_CMD "https://noxon.wpmix.net/counter.php?msg=pr $PR $last_commit rebuild started&todevs=1"
-
 $NPM_CMD run build:testnet https://testnet$PR.swaponline.site/ 
-
-
-$NPM_CMD run build:mainnet https://mainnet$PR.swaponline.site/ 
 
 mkdir -p $SCRIPT_PATH/mainnet$PR/MultiCurrencyWallet/
 cp -r build-mainnet $SCRIPT_PATH/mainnet$PR/MultiCurrencyWallet/build-testnet
@@ -68,7 +63,6 @@ $CURL_CMD "https://noxon.wpmix.net/counter.php?msg=testnet$PR.swaponline.site ma
 $CURL_CMD -s -H "Authorization: token " -X POST -d '{"body": "commit '"$last_commit"' rebuilded https://testnet'"$PR"'.swaponline.site https://mainnet'"$PR"'.swaponline.site "}' "https://api.github.com/repos/swaponline/MultiCurrencyWallet/issues/$PR/comments"
 
 # rebuild testnet also
-#cd /var/www/ropsten.swaponline.io/MultiCurrencyWallet && git pull && npm i && npm run build:testnet https://ropsten.swaponline.io/
 
 else
 continue
@@ -78,8 +72,6 @@ done
 
 
 #find PR without folders
-
-$CURL_CMD https://api.github.com/repositories/130675402/pulls > /tmp/pulls.json 
 
 
 
@@ -139,15 +131,10 @@ $GIT_CMD reset --hard
 
 $NPM_CMD i --force
 
-$NPM_CMD run build:testnet https://testnet$PR.swaponline.site/ 
-$CURL_CMD "https://noxon.wpmix.net/counter.php?msg=testnet$PR.swaponline.site builded&todevs=1"
-
 
 #$NPM_CMD run build:mainnet https://mainnet$PR.swaponline.site/ 
 #cp -r build-mainnet $SCRIPT_PATH/mainnet$PR/MultiCurrencyWallet/build-testnet
 
-$CURL_CMD "https://noxon.wpmix.net/counter.php?msg=mainnet$PR.swaponline.site builded&todevs=1"
-$CURL_CMD -s -H "Authorization: token " -X POST -d '{"body": "builded https://testnet'"$PR"'.swaponline.site ;"}' "https://api.github.com/repos/swaponline/MultiCurrencyWallet/issues/$PR/comments"
 
 echo "-----------------"  >> /var/log/deploy.log
 echo "Build at $(/bin/date +%H\:%M\:%S\ %d\.%m\.%Y):"  >> /var/log/deploy.log
