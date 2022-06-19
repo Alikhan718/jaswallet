@@ -2,12 +2,9 @@
 
 # build
 
-npm run build:mainnet https://swaponline.github.io/
 
 # update repo or clone
 
-git clone https://sorentobot:$1@github.com/swaponline/swaponline.github.io.git
-cd swaponline.github.io
 git checkout master
 git fetch origin
 git reset --hard origin/master
@@ -33,8 +30,6 @@ git push --force
 # return back to root
 cd ..
 
-
-curl GET "http://noxon.wpmix.net/counter.php?msg=/scripts/deploy finished. https://swaponline.github.io/ ready&todevs=1"
  
 #if [ $GITHUB_TOKEN ]; then
 #  curl -u caffeinum:$GITHUB_TOKEN -X POST https://api.github.com/repos/swaponline/swaponline.github.io/pulls -d '{"title":"build","head":"deploy","base":"master"}'
