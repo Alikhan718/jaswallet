@@ -1,3 +1,4 @@
+#JasWallet scripts
 #!/bin/sh
 
 #bash script example to autodeploy all pullrequests to separate folders. 
