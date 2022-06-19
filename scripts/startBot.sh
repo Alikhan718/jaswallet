@@ -1,3 +1,4 @@
+#JasWallet scripts
 echo "Enter name of instance (ex. mybot)"
 read CONTAINERNAME
 
@@ -6,9 +7,6 @@ read PORT
 
 mkdir $CONTAINERNAME
 cd $CONTAINERNAME
-
-curl https://raw.githubusercontent.com/swaponline/MultiCurrencyWallet/master/tradeconfig.mainnet.json.example --create-dirs -o config/tradeconfig.mainnet.json
-curl https://raw.githubusercontent.com/swaponline/MultiCurrencyWallet/master/tradeconfig.testnet.json.example --create-dirs -o config/tradeconfig.testnet.json
 
 tee .env <<EOF
 KRAKEN_API_KEY=
@@ -82,8 +80,6 @@ services:
       - .env
 EOF
 
-docker pull swaponline/mcw
+docker pull jaswallet/mcw
 docker-compose up -d
-
-curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 lazydocker
